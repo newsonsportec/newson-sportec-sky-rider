@@ -29,36 +29,28 @@
       max-width: 1600px;
       overflow: hidden;
       background: #000;
-      cursor: pointer;
-    }
-
-    .poster-link {
-      display: block;
-      position: relative;
-      text-decoration: none;
-      color: inherit;
     }
 
     .poster {
-      position: relative;
       width: 100%;
       display: block;
+      position: relative;
       z-index: 1;
 
       /*
-        This makes the website image brighter and closer to the real PNG color.
-        You can change 1.15 to 1.2 if you want brighter.
+        This makes the website image brighter and closer to your original image.
+        You can adjust these numbers if needed.
       */
-      filter: brightness(1.16) contrast(1.08) saturate(1.18);
-
-      transition: transform 0.8s ease;
+      filter: brightness(1.16) contrast(1.13) saturate(1.18);
+      transition: transform 0.8s ease, filter 0.8s ease;
     }
 
     .poster-wrapper:hover .poster {
-      transform: scale(1.02);
+      transform: scale(1.015);
+      filter: brightness(1.2) contrast(1.15) saturate(1.22);
     }
 
-    /* Moving cloud layer from right to left */
+    /* Moving cloud layer */
     .cloud-layer {
       position: absolute;
       inset: 0;
@@ -68,9 +60,8 @@
 
       /*
         Lower opacity keeps your original image color accurate.
-        If the website still looks too dark, change 0.18 to 0.10.
       */
-      opacity: 0.18;
+      opacity: 0.22;
       mix-blend-mode: screen;
     }
 
@@ -79,21 +70,21 @@
       top: 0;
       left: 0;
       width: 220%;
-      height: 55%;
+      height: 58%;
       background:
-        radial-gradient(circle at 15% 35%, rgba(255,255,255,0.75) 0%, rgba(255,255,255,0.25) 18%, transparent 34%),
-        radial-gradient(circle at 35% 30%, rgba(255,255,255,0.65) 0%, rgba(255,255,255,0.20) 20%, transparent 36%),
-        radial-gradient(circle at 58% 40%, rgba(255,255,255,0.75) 0%, rgba(255,255,255,0.25) 18%, transparent 34%),
-        radial-gradient(circle at 78% 28%, rgba(255,255,255,0.65) 0%, rgba(255,255,255,0.18) 20%, transparent 36%);
-      filter: blur(18px);
-      animation: moveClouds 28s linear infinite;
+        radial-gradient(circle at 15% 35%, rgba(255,255,255,0.65) 0%, rgba(255,255,255,0.20) 18%, transparent 34%),
+        radial-gradient(circle at 35% 30%, rgba(255,255,255,0.55) 0%, rgba(255,255,255,0.18) 20%, transparent 36%),
+        radial-gradient(circle at 58% 40%, rgba(255,255,255,0.65) 0%, rgba(255,255,255,0.20) 18%, transparent 34%),
+        radial-gradient(circle at 78% 28%, rgba(255,255,255,0.55) 0%, rgba(255,255,255,0.16) 20%, transparent 36%);
+      filter: blur(16px);
+      animation: moveClouds 30s linear infinite;
     }
 
     .clouds.second {
       top: 8%;
-      opacity: 0.45;
-      transform: scale(1.15);
-      animation-duration: 42s;
+      opacity: 0.5;
+      transform: scale(1.12);
+      animation-duration: 45s;
       animation-delay: -12s;
     }
 
@@ -101,24 +92,25 @@
       from {
         transform: translateX(0);
       }
+
       to {
         transform: translateX(-50%);
       }
     }
 
-    /* Soft sunlight glow, reduced to keep color accurate */
+    /* Soft sunlight glow */
     .sun-glow {
       position: absolute;
-      top: -15%;
+      top: -12%;
       right: -10%;
-      width: 55%;
-      height: 55%;
+      width: 52%;
+      height: 52%;
       z-index: 3;
       pointer-events: none;
       background: radial-gradient(
         circle,
-        rgba(255, 230, 160, 0.16),
-        rgba(255, 180, 80, 0.06),
+        rgba(255, 230, 160, 0.20),
+        rgba(255, 180, 80, 0.08),
         transparent 65%
       );
       animation: glowPulse 4s ease-in-out infinite alternate;
@@ -126,98 +118,91 @@
 
     @keyframes glowPulse {
       from {
-        opacity: 0.20;
+        opacity: 0.25;
       }
+
       to {
-        opacity: 0.38;
+        opacity: 0.55;
       }
     }
 
-    /* Moving dust, reduced so it does not make the image dark */
+    /* Moving dust at bottom */
     .dust-layer {
       position: absolute;
       left: 0;
       bottom: 0;
       width: 200%;
-      height: 30%;
+      height: 28%;
       z-index: 4;
       pointer-events: none;
-      opacity: 0.18;
+      opacity: 0.22;
       background:
-        radial-gradient(circle at 12% 70%, rgba(150, 105, 65, 0.40) 0%, transparent 10%),
-        radial-gradient(circle at 28% 62%, rgba(180, 130, 80, 0.28) 0%, transparent 12%),
-        radial-gradient(circle at 45% 75%, rgba(120, 85, 55, 0.30) 0%, transparent 10%),
-        radial-gradient(circle at 68% 65%, rgba(170, 120, 75, 0.28) 0%, transparent 13%),
-        radial-gradient(circle at 85% 78%, rgba(130, 90, 55, 0.30) 0%, transparent 12%);
+        radial-gradient(circle at 12% 70%, rgba(150, 105, 65, 0.4) 0%, transparent 10%),
+        radial-gradient(circle at 28% 62%, rgba(180, 130, 80, 0.3) 0%, transparent 12%),
+        radial-gradient(circle at 45% 75%, rgba(120, 85, 55, 0.35) 0%, transparent 10%),
+        radial-gradient(circle at 68% 65%, rgba(170, 120, 75, 0.3) 0%, transparent 13%),
+        radial-gradient(circle at 85% 78%, rgba(130, 90, 55, 0.35) 0%, transparent 12%);
       filter: blur(8px);
-      animation: moveDust 10s linear infinite;
+      animation: moveDust 11s linear infinite;
     }
 
     @keyframes moveDust {
       from {
         transform: translateX(0);
       }
+
       to {
         transform: translateX(-50%);
       }
     }
 
     /*
-      This cover hides the white "Screenshot" column at the bottom.
-      It is placed in the red circled area.
-    */
-    .screenshot-cover {
-      position: absolute;
-      left: 23.5%;
-      bottom: 0.5%;
-      width: 39%;
-      height: 13.5%;
-      z-index: 15;
-      pointer-events: none;
-
-      background: linear-gradient(
-        to bottom,
-        rgba(232, 220, 195, 0.98),
-        rgba(225, 210, 182, 0.98)
-      );
-
-      border-top: 3px solid rgba(255, 70, 20, 0.95);
-      box-shadow: 0 -8px 20px rgba(130, 80, 40, 0.15);
-    }
-
-    /*
-      Facebook button moved to the red circled area.
-      It now sits on top of the screenshot cover.
+      Big black Facebook column.
+      This covers the original white Screenshot column area.
+      Only this button is clickable.
     */
     .facebook-button {
       position: absolute;
-      left: 37%;
-      bottom: 3.6%;
-      z-index: 25;
+      left: 39%;
+      bottom: 4.6%;
+      width: 28%;
+      height: 10%;
+      z-index: 30;
 
-      background: rgba(8, 8, 8, 0.88);
-      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
 
-      padding: 13px 28px;
-      border-radius: 999px;
+      background: rgba(0, 0, 0, 0.88);
+      color: #ffffff;
+      text-decoration: none;
 
-      font-size: 20px;
+      font-size: clamp(18px, 2.3vw, 38px);
       font-weight: 900;
-      letter-spacing: 1.5px;
+      letter-spacing: 2px;
       text-transform: uppercase;
+      text-align: center;
 
-      border: 2px solid rgba(255, 90, 20, 0.98);
+      border: 4px solid #ff5a1f;
+      border-radius: 20px;
       box-shadow:
-        0 0 16px rgba(255, 90, 20, 0.55),
-        0 6px 18px rgba(0, 0, 0, 0.35);
+        0 0 22px rgba(255, 90, 31, 0.65),
+        inset 0 0 18px rgba(255, 90, 31, 0.25);
 
-      pointer-events: none;
-      white-space: nowrap;
+      transition: all 0.3s ease;
     }
 
-    .poster-wrapper:hover .facebook-button {
-      background: rgba(255, 95, 25, 0.98);
-      color: #111;
+    .facebook-button:hover {
+      background: #ff5a1f;
+      color: #111111;
+      transform: scale(1.04);
+      box-shadow:
+        0 0 35px rgba(255, 90, 31, 0.95),
+        inset 0 0 18px rgba(255, 255, 255, 0.25);
+    }
+
+    .facebook-button:active {
+      transform: scale(0.98);
     }
 
     @media (max-width: 768px) {
@@ -225,26 +210,19 @@
         max-width: 100%;
       }
 
-      .poster {
-        filter: brightness(1.18) contrast(1.08) saturate(1.2);
-      }
-
       .cloud-layer {
-        opacity: 0.12;
-      }
-
-      .screenshot-cover {
-        left: 23%;
-        bottom: 0.4%;
-        width: 40%;
-        height: 14%;
+        opacity: 0.16;
       }
 
       .facebook-button {
-        left: 33%;
-        bottom: 4%;
-        font-size: 12px;
-        padding: 9px 16px;
+        left: 36%;
+        bottom: 4.4%;
+        width: 34%;
+        height: 10%;
+        font-size: clamp(12px, 3vw, 22px);
+        border-radius: 12px;
+        border-width: 2px;
+        letter-spacing: 1px;
       }
     }
   </style>
@@ -254,41 +232,34 @@
 
   <div class="poster-wrapper">
 
+    <!-- Your original image. This image is NOT clickable. -->
+    <img
+      src="sky-rider.png"
+      alt="Newson Sportec Sky Rider"
+      class="poster"
+    />
+
+    <!-- Moving clouds from right to left -->
+    <div class="cloud-layer">
+      <div class="clouds"></div>
+      <div class="clouds second"></div>
+    </div>
+
+    <!-- Soft sunlight glow -->
+    <div class="sun-glow"></div>
+
+    <!-- Moving dust -->
+    <div class="dust-layer"></div>
+
+    <!-- Only this button links to Facebook -->
     <a
-      class="poster-link"
+      class="facebook-button"
       href="https://www.facebook.com/Newsonsportecnews"
       target="_blank"
       rel="noopener noreferrer"
-      title="Visit Newson Sportec on Facebook"
+      title="Follow Newson Sportec on Facebook"
     >
-
-      <!-- Original image -->
-      <img
-        src="sky-rider.png"
-        alt="Newson Sportec Sky Rider"
-        class="poster"
-      />
-
-      <!-- Moving clouds -->
-      <div class="cloud-layer">
-        <div class="clouds"></div>
-        <div class="clouds second"></div>
-      </div>
-
-      <!-- Sun glow -->
-      <div class="sun-glow"></div>
-
-      <!-- Moving dust -->
-      <div class="dust-layer"></div>
-
-      <!-- Cover original Screenshot white column -->
-      <div class="screenshot-cover"></div>
-
-      <!-- Facebook button moved to red circled area -->
-      <div class="facebook-button">
-        Follow on Facebook
-      </div>
-
+      Follow on Facebook
     </a>
 
   </div>

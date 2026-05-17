@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -44,7 +44,9 @@
       filter: brightness(1.22) contrast(1.14) saturate(1.22);
     }
 
-    /* Moving cloud layer */
+    /* =========================
+       Moving cloud layer
+    ========================= */
     .cloud-layer {
       position: absolute;
       inset: 0;
@@ -79,15 +81,13 @@
     }
 
     @keyframes moveClouds {
-      from {
-        transform: translateX(0);
-      }
-      to {
-        transform: translateX(-50%);
-      }
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
     }
 
-    /* Soft sunlight glow */
+    /* =========================
+       Soft sunlight glow
+    ========================= */
     .sun-glow {
       position: absolute;
       top: -12%;
@@ -106,15 +106,13 @@
     }
 
     @keyframes glowPulse {
-      from {
-        opacity: 0.25;
-      }
-      to {
-        opacity: 0.50;
-      }
+      from { opacity: 0.25; }
+      to   { opacity: 0.50; }
     }
 
-    /* Moving dust */
+    /* =========================
+       Bottom moving dust
+    ========================= */
     .dust-layer {
       position: absolute;
       left: 0;
@@ -135,19 +133,175 @@
     }
 
     @keyframes moveDust {
-      from {
-        transform: translateX(0);
-      }
-      to {
-        transform: translateX(-50%);
-      }
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
     }
 
-    /*
-      Facebook button moved to the red-arrow area.
-      It covers the circled Screenshot area.
-      Only this button is clickable.
-    */
+    /* =========================
+       Splitting dust effect
+       This makes the dust look like
+       it bursts and splits outward
+       while the rider jumps
+    ========================= */
+    .split-dust {
+      position: absolute;
+      left: 63%;
+      bottom: 12%;
+      width: 34%;
+      height: 26%;
+      z-index: 5;
+      pointer-events: none;
+    }
+
+    .split-dust span {
+      position: absolute;
+      left: 50%;
+      bottom: 18%;
+      width: 38%;
+      height: 18%;
+      transform-origin: left center;
+      border-radius: 999px;
+      filter: blur(8px);
+      opacity: 0.55;
+      mix-blend-mode: multiply;
+    }
+
+    .split-dust .dust1 {
+      background: linear-gradient(to right,
+        rgba(120, 82, 48, 0.70),
+        rgba(171, 120, 74, 0.50),
+        rgba(225, 180, 130, 0.00)
+      );
+      transform: rotate(-32deg);
+      animation: splitLeftUpper 2.8s ease-in-out infinite;
+    }
+
+    .split-dust .dust2 {
+      background: linear-gradient(to right,
+        rgba(110, 72, 40, 0.72),
+        rgba(165, 112, 68, 0.48),
+        rgba(225, 180, 130, 0.00)
+      );
+      transform: rotate(-10deg);
+      animation: splitLeftLower 2.5s ease-in-out infinite;
+    }
+
+    .split-dust .dust3 {
+      background: linear-gradient(to right,
+        rgba(118, 80, 45, 0.72),
+        rgba(172, 118, 70, 0.48),
+        rgba(225, 180, 130, 0.00)
+      );
+      transform: rotate(14deg);
+      animation: splitRightUpper 2.6s ease-in-out infinite;
+    }
+
+    .split-dust .dust4 {
+      background: linear-gradient(to right,
+        rgba(105, 70, 38, 0.72),
+        rgba(160, 108, 65, 0.46),
+        rgba(225, 180, 130, 0.00)
+      );
+      transform: rotate(30deg);
+      animation: splitRightLower 2.9s ease-in-out infinite;
+    }
+
+    .split-dust .dust5 {
+      width: 22%;
+      height: 12%;
+      background: radial-gradient(circle,
+        rgba(135, 90, 55, 0.60) 0%,
+        rgba(185, 130, 80, 0.22) 40%,
+        transparent 75%
+      );
+      transform: rotate(0deg);
+      animation: dustBurst 2.3s ease-in-out infinite;
+      filter: blur(5px);
+    }
+
+    @keyframes splitLeftUpper {
+      0%   { transform: translate(0,0) rotate(-32deg) scaleX(0.85); opacity: 0.15; }
+      25%  { transform: translate(-12px,-10px) rotate(-37deg) scaleX(1.00); opacity: 0.45; }
+      50%  { transform: translate(-26px,-16px) rotate(-42deg) scaleX(1.15); opacity: 0.60; }
+      75%  { transform: translate(-40px,-22px) rotate(-46deg) scaleX(1.25); opacity: 0.35; }
+      100% { transform: translate(-54px,-28px) rotate(-50deg) scaleX(1.35); opacity: 0.00; }
+    }
+
+    @keyframes splitLeftLower {
+      0%   { transform: translate(0,0) rotate(-10deg) scaleX(0.82); opacity: 0.14; }
+      25%  { transform: translate(-10px,-4px) rotate(-14deg) scaleX(0.96); opacity: 0.42; }
+      50%  { transform: translate(-22px,-8px) rotate(-18deg) scaleX(1.10); opacity: 0.58; }
+      75%  { transform: translate(-34px,-12px) rotate(-22deg) scaleX(1.22); opacity: 0.34; }
+      100% { transform: translate(-46px,-15px) rotate(-25deg) scaleX(1.30); opacity: 0.00; }
+    }
+
+    @keyframes splitRightUpper {
+      0%   { transform: translate(0,0) rotate(14deg) scaleX(0.84); opacity: 0.14; }
+      25%  { transform: translate(12px,-6px) rotate(18deg) scaleX(1.00); opacity: 0.44; }
+      50%  { transform: translate(26px,-12px) rotate(22deg) scaleX(1.14); opacity: 0.60; }
+      75%  { transform: translate(40px,-18px) rotate(26deg) scaleX(1.24); opacity: 0.36; }
+      100% { transform: translate(55px,-24px) rotate(30deg) scaleX(1.34); opacity: 0.00; }
+    }
+
+    @keyframes splitRightLower {
+      0%   { transform: translate(0,0) rotate(30deg) scaleX(0.82); opacity: 0.12; }
+      25%  { transform: translate(8px,0px) rotate(34deg) scaleX(0.96); opacity: 0.40; }
+      50%  { transform: translate(18px,2px) rotate(38deg) scaleX(1.08); opacity: 0.55; }
+      75%  { transform: translate(28px,5px) rotate(42deg) scaleX(1.18); opacity: 0.30; }
+      100% { transform: translate(38px,8px) rotate(46deg) scaleX(1.28); opacity: 0.00; }
+    }
+
+    @keyframes dustBurst {
+      0%   { transform: translate(0,0) scale(0.7); opacity: 0.10; }
+      30%  { transform: translate(-8px,-6px) scale(1.0); opacity: 0.35; }
+      55%  { transform: translate(-14px,-10px) scale(1.25); opacity: 0.52; }
+      80%  { transform: translate(-20px,-14px) scale(1.45); opacity: 0.25; }
+      100% { transform: translate(-24px,-16px) scale(1.60); opacity: 0.00; }
+    }
+
+    /* =========================
+       Small dust particles
+    ========================= */
+    .dust-particles {
+      position: absolute;
+      left: 61%;
+      bottom: 12%;
+      width: 30%;
+      height: 22%;
+      z-index: 6;
+      pointer-events: none;
+    }
+
+    .dust-particles i {
+      position: absolute;
+      display: block;
+      width: 10px;
+      height: 10px;
+      background: rgba(126, 87, 50, 0.45);
+      border-radius: 50%;
+      filter: blur(1px);
+      animation: particleFly 2.7s linear infinite;
+    }
+
+    .dust-particles i:nth-child(1) { left: 8%;  bottom: 12%; animation-delay: 0s;   }
+    .dust-particles i:nth-child(2) { left: 18%; bottom: 20%; animation-delay: 0.4s; }
+    .dust-particles i:nth-child(3) { left: 28%; bottom: 10%; animation-delay: 0.8s; }
+    .dust-particles i:nth-child(4) { left: 38%; bottom: 18%; animation-delay: 1.2s; }
+    .dust-particles i:nth-child(5) { left: 48%; bottom: 8%;  animation-delay: 1.6s; }
+    .dust-particles i:nth-child(6) { left: 60%; bottom: 16%; animation-delay: 2s;   }
+    .dust-particles i:nth-child(7) { left: 72%; bottom: 12%; animation-delay: 2.2s; }
+    .dust-particles i:nth-child(8) { left: 84%; bottom: 18%; animation-delay: 2.4s; }
+
+    @keyframes particleFly {
+      0%   { transform: translate(0, 0) scale(0.6); opacity: 0; }
+      15%  { opacity: 0.55; }
+      50%  { transform: translate(24px, -16px) scale(1.0); opacity: 0.45; }
+      100% { transform: translate(55px, -30px) scale(1.25); opacity: 0; }
+    }
+
+    /* =========================
+       Facebook button
+    ========================= */
     .facebook-button {
       position: absolute;
       left: 27%;
@@ -199,14 +353,28 @@
       }
 
       .facebook-button {
-        left: 26%;
-        bottom: 1.0%;
-        width: 42%;
+        left: 25%;
+        bottom: 1%;
+        width: 44%;
         height: 10%;
         font-size: clamp(11px, 2.8vw, 20px);
         border-width: 2px;
         border-radius: 14px;
         letter-spacing: 1px;
+      }
+
+      .split-dust {
+        left: 61%;
+        bottom: 12%;
+        width: 34%;
+        height: 22%;
+      }
+
+      .dust-particles {
+        left: 60%;
+        bottom: 12%;
+        width: 28%;
+        height: 20%;
       }
     }
   </style>
@@ -231,10 +399,31 @@
     <!-- Sun glow -->
     <div class="sun-glow"></div>
 
-    <!-- Dust effect -->
+    <!-- Bottom dust -->
     <div class="dust-layer"></div>
 
-    <!-- Only this button links to Facebook -->
+    <!-- Splitting dust effect -->
+    <div class="split-dust">
+      <span class="dust1"></span>
+      <span class="dust2"></span>
+      <span class="dust3"></span>
+      <span class="dust4"></span>
+      <span class="dust5"></span>
+    </div>
+
+    <!-- Small flying particles -->
+    <div class="dust-particles">
+      <i></i>
+      <i></i>
+      <i></i>
+      <i></i>
+      <i></i>
+      <i></i>
+      <i></i>
+      <i></i>
+    </div>
+
+    <!-- Facebook button -->
     <a
       class="facebook-button"
       href="https://www.facebook.com/Newsonsportecnews"

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Newson Sportec Sky Rider</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      background: #111;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: Arial, Helvetica, sans-serif;
+      overflow-x: hidden;
+    }
+
+    .poster-wrapper {
+      position: relative;
+      width: 100%;
+      max-width: 1600px;
+      overflow: hidden;
+      background: #000;
+    }
+
+    .poster {
+      position: relative;
+      width: 100%;
+      display: block;
+      z-index: 1;
+    }
+
+    /* Moving cloud layer */
+    .cloud-layer {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      pointer-events: none;
+      overflow: hidden;
+      opacity: 0.45;
+      mix-blend-mode: screen;
+    }
+
+    .clouds {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 220%;
+      height: 55%;
+      background:
+        radial-gradient(circle at 15% 35%, rgba(255,255,255,0.75) 0%, rgba(255,255,255,0.25) 18%, transparent 34%),
+        radial-gradient(circle at 35% 30%, rgba(255,255,255,0.65) 0%, rgba(255,255,255,0.20) 20%, transparent 36%),
+        radial-gradient(circle at 58% 40%, rgba(255,255,255,0.75) 0%, rgba(255,255,255,0.25) 18%, transparent 34%),
+        radial-gradient(circle at 78% 28%, rgba(255,255,255,0.65) 0%, rgba(255,255,255,0.18) 20%, transparent 36%);
+      filter: blur(18px);
+      animation: moveClouds 28s linear infinite;
+    }
+
+    .clouds.second {
+      top: 8%;
+      opacity: 0.55;
+      transform: scale(1.15);
+      animation-duration: 42s;
+      animation-delay: -12s;
+    }
+
+    @keyframes moveClouds {
+      from {
+        transform: translateX(0);
+      }
+      to {
+        transform: translateX(-50%);
+      }
+    }
+
+    /* Soft sunlight glow */
+    .sun-glow {
+      position: absolute;
+      top: -15%;
+      right: -10%;
+      width: 55%;
+      height: 55%;
+      z-index: 3;
+      pointer-events: none;
+      background: radial-gradient(circle, rgba(255, 230, 160, 0.35), rgba(255, 180, 80, 0.12), transparent 65%);
+      animation: glowPulse 4s ease-in-out infinite alternate;
+    }
+
+    @keyframes glowPulse {
+      from {
+        opacity: 0.35;
+      }
+      to {
+        opacity: 0.7;
+      }
+    }
+
+    /* Moving dust at bottom */
+    .dust-layer {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 200%;
+      height: 30%;
+      z-index: 4;
+      pointer-events: none;
+      opacity: 0.35;
+      background:
+        radial-gradient(circle at 12% 70%, rgba(150, 105, 65, 0.45) 0%, transparent 10%),
+        radial-gradient(circle at 28% 62%, rgba(180, 130, 80, 0.35) 0%, transparent 12%),
+        radial-gradient(circle at 45% 75%, rgba(120, 85, 55, 0.42) 0%, transparent 10%),
+        radial-gradient(circle at 68% 65%, rgba(170, 120, 75, 0.35) 0%, transparent 13%),
+        radial-gradient(circle at 85% 78%, rgba(130, 90, 55, 0.4) 0%, transparent 12%);
+      filter: blur(10px);
+      animation: moveDust 10s linear infinite;
+    }
+
+    @keyframes moveDust {
+      from {
+        transform: translateX(0);
+      }
+      to {
+        transform: translateX(-50%);
+      }
+    }
+
+    /* Optional hover zoom */
+    .poster-wrapper:hover .poster {
+      transform: scale(1.02);
+    }
+
+    .poster {
+      transition: transform 0.8s ease;
+    }
+
+    @media (max-width: 768px) {
+      .poster-wrapper {
+        max-width: 100%;
+      }
+
+      .cloud-layer {
+        opacity: 0.35;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="poster-wrapper">
+
+    <!-- Your original image -->
+    <img src="sky-rider.png" alt="Newson Sportec Sky Rider" class="poster" />
+
+    <!-- Moving clouds -->
+    <div class="cloud-layer">
+      <div class="clouds"></div>
+      <div class="clouds second"></div>
+    </div>
+
+    <!-- Sun glow -->
+    <div class="sun-glow"></div>
+
+    <!-- Moving dust -->
+    <div class="dust-layer"></div>
+
+  </div>
+
+</body>
+</html>

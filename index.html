@@ -29,6 +29,14 @@
       max-width: 1600px;
       overflow: hidden;
       background: #000;
+      cursor: pointer;
+    }
+
+    .poster-link {
+      display: block;
+      position: relative;
+      text-decoration: none;
+      color: inherit;
     }
 
     .poster {
@@ -36,6 +44,11 @@
       width: 100%;
       display: block;
       z-index: 1;
+      transition: transform 0.8s ease;
+    }
+
+    .poster-wrapper:hover .poster {
+      transform: scale(1.02);
     }
 
     /* Moving cloud layer */
@@ -90,7 +103,12 @@
       height: 55%;
       z-index: 3;
       pointer-events: none;
-      background: radial-gradient(circle, rgba(255, 230, 160, 0.35), rgba(255, 180, 80, 0.12), transparent 65%);
+      background: radial-gradient(
+        circle,
+        rgba(255, 230, 160, 0.35),
+        rgba(255, 180, 80, 0.12),
+        transparent 65%
+      );
       animation: glowPulse 4s ease-in-out infinite alternate;
     }
 
@@ -132,13 +150,50 @@
       }
     }
 
-    /* Optional hover zoom */
-    .poster-wrapper:hover .poster {
-      transform: scale(1.02);
+    /*
+      This box hides the word "Screenshot" at the bottom center.
+      You can adjust width, height, bottom, or left if needed.
+    */
+    .screenshot-cover {
+      position: absolute;
+      left: 50%;
+      bottom: 0.5%;
+      transform: translateX(-50%);
+      width: 22%;
+      height: 9%;
+      z-index: 10;
+      pointer-events: none;
+      background: linear-gradient(
+        to bottom,
+        rgba(236, 225, 204, 0.96),
+        rgba(231, 220, 198, 0.98)
+      );
+      border-radius: 28px 28px 0 0;
+      filter: blur(0.2px);
     }
 
-    .poster {
-      transition: transform 0.8s ease;
+    /* Facebook button */
+    .facebook-button {
+      position: absolute;
+      right: 4%;
+      bottom: 5%;
+      z-index: 20;
+      background: rgba(0, 0, 0, 0.78);
+      color: white;
+      padding: 14px 22px;
+      border-radius: 999px;
+      font-size: 18px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      border: 2px solid rgba(255, 105, 30, 0.95);
+      box-shadow: 0 0 18px rgba(255, 105, 30, 0.45);
+      pointer-events: none;
+    }
+
+    .poster-wrapper:hover .facebook-button {
+      background: rgba(255, 105, 30, 0.95);
+      color: #111;
     }
 
     @media (max-width: 768px) {
@@ -149,6 +204,17 @@
       .cloud-layer {
         opacity: 0.35;
       }
+
+      .facebook-button {
+        font-size: 12px;
+        padding: 9px 14px;
+      }
+
+      .screenshot-cover {
+        width: 25%;
+        height: 9%;
+        bottom: 0.3%;
+      }
     }
   </style>
 </head>
@@ -157,20 +223,42 @@
 
   <div class="poster-wrapper">
 
-    <!-- Your original image -->
-    <img src="sky-rider.png" alt="Newson Sportec Sky Rider" class="poster" />
+    <a
+      class="poster-link"
+      href="https://www.facebook.com/Newsonsportecnews"
+      target="_blank"
+      rel="noopener noreferrer"
+      title="Visit Newson Sportec on Facebook"
+    >
 
-    <!-- Moving clouds -->
-    <div class="cloud-layer">
-      <div class="clouds"></div>
-      <div class="clouds second"></div>
-    </div>
+      <!-- Your original image -->
+      <img
+        src="sky-rider.png"
+        alt="Newson Sportec Sky Rider"
+        class="poster"
+      />
 
-    <!-- Sun glow -->
-    <div class="sun-glow"></div>
+      <!-- Moving clouds -->
+      <div class="cloud-layer">
+        <div class="clouds"></div>
+        <div class="clouds second"></div>
+      </div>
 
-    <!-- Moving dust -->
-    <div class="dust-layer"></div>
+      <!-- Sun glow -->
+      <div class="sun-glow"></div>
+
+      <!-- Moving dust -->
+      <div class="dust-layer"></div>
+
+      <!-- Cover the unwanted Screenshot label -->
+      <div class="screenshot-cover"></div>
+
+      <!-- Facebook link button -->
+      <div class="facebook-button">
+        Follow on Facebook
+      </div>
+
+    </a>
 
   </div>
 

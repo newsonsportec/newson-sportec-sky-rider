@@ -44,6 +44,13 @@
       width: 100%;
       display: block;
       z-index: 1;
+
+      /*
+        This makes the website image brighter and closer to the real PNG color.
+        You can change 1.15 to 1.2 if you want brighter.
+      */
+      filter: brightness(1.16) contrast(1.08) saturate(1.18);
+
       transition: transform 0.8s ease;
     }
 
@@ -51,14 +58,19 @@
       transform: scale(1.02);
     }
 
-    /* Moving cloud layer */
+    /* Moving cloud layer from right to left */
     .cloud-layer {
       position: absolute;
       inset: 0;
       z-index: 2;
       pointer-events: none;
       overflow: hidden;
-      opacity: 0.45;
+
+      /*
+        Lower opacity keeps your original image color accurate.
+        If the website still looks too dark, change 0.18 to 0.10.
+      */
+      opacity: 0.18;
       mix-blend-mode: screen;
     }
 
@@ -79,7 +91,7 @@
 
     .clouds.second {
       top: 8%;
-      opacity: 0.55;
+      opacity: 0.45;
       transform: scale(1.15);
       animation-duration: 42s;
       animation-delay: -12s;
@@ -94,7 +106,7 @@
       }
     }
 
-    /* Soft sunlight glow */
+    /* Soft sunlight glow, reduced to keep color accurate */
     .sun-glow {
       position: absolute;
       top: -15%;
@@ -105,8 +117,8 @@
       pointer-events: none;
       background: radial-gradient(
         circle,
-        rgba(255, 230, 160, 0.35),
-        rgba(255, 180, 80, 0.12),
+        rgba(255, 230, 160, 0.16),
+        rgba(255, 180, 80, 0.06),
         transparent 65%
       );
       animation: glowPulse 4s ease-in-out infinite alternate;
@@ -114,14 +126,14 @@
 
     @keyframes glowPulse {
       from {
-        opacity: 0.35;
+        opacity: 0.20;
       }
       to {
-        opacity: 0.7;
+        opacity: 0.38;
       }
     }
 
-    /* Moving dust at bottom */
+    /* Moving dust, reduced so it does not make the image dark */
     .dust-layer {
       position: absolute;
       left: 0;
@@ -130,14 +142,14 @@
       height: 30%;
       z-index: 4;
       pointer-events: none;
-      opacity: 0.35;
+      opacity: 0.18;
       background:
-        radial-gradient(circle at 12% 70%, rgba(150, 105, 65, 0.45) 0%, transparent 10%),
-        radial-gradient(circle at 28% 62%, rgba(180, 130, 80, 0.35) 0%, transparent 12%),
-        radial-gradient(circle at 45% 75%, rgba(120, 85, 55, 0.42) 0%, transparent 10%),
-        radial-gradient(circle at 68% 65%, rgba(170, 120, 75, 0.35) 0%, transparent 13%),
-        radial-gradient(circle at 85% 78%, rgba(130, 90, 55, 0.4) 0%, transparent 12%);
-      filter: blur(10px);
+        radial-gradient(circle at 12% 70%, rgba(150, 105, 65, 0.40) 0%, transparent 10%),
+        radial-gradient(circle at 28% 62%, rgba(180, 130, 80, 0.28) 0%, transparent 12%),
+        radial-gradient(circle at 45% 75%, rgba(120, 85, 55, 0.30) 0%, transparent 10%),
+        radial-gradient(circle at 68% 65%, rgba(170, 120, 75, 0.28) 0%, transparent 13%),
+        radial-gradient(circle at 85% 78%, rgba(130, 90, 55, 0.30) 0%, transparent 12%);
+      filter: blur(8px);
       animation: moveDust 10s linear infinite;
     }
 
@@ -151,48 +163,60 @@
     }
 
     /*
-      This box hides the word "Screenshot" at the bottom center.
-      You can adjust width, height, bottom, or left if needed.
+      This cover hides the white "Screenshot" column at the bottom.
+      It is placed in the red circled area.
     */
     .screenshot-cover {
       position: absolute;
-      left: 50%;
+      left: 23.5%;
       bottom: 0.5%;
-      transform: translateX(-50%);
-      width: 22%;
-      height: 9%;
-      z-index: 10;
+      width: 39%;
+      height: 13.5%;
+      z-index: 15;
       pointer-events: none;
+
       background: linear-gradient(
         to bottom,
-        rgba(236, 225, 204, 0.96),
-        rgba(231, 220, 198, 0.98)
+        rgba(232, 220, 195, 0.98),
+        rgba(225, 210, 182, 0.98)
       );
-      border-radius: 28px 28px 0 0;
-      filter: blur(0.2px);
+
+      border-top: 3px solid rgba(255, 70, 20, 0.95);
+      box-shadow: 0 -8px 20px rgba(130, 80, 40, 0.15);
     }
 
-    /* Facebook button */
+    /*
+      Facebook button moved to the red circled area.
+      It now sits on top of the screenshot cover.
+    */
     .facebook-button {
       position: absolute;
-      right: 4%;
-      bottom: 5%;
-      z-index: 20;
-      background: rgba(0, 0, 0, 0.78);
+      left: 37%;
+      bottom: 3.6%;
+      z-index: 25;
+
+      background: rgba(8, 8, 8, 0.88);
       color: white;
-      padding: 14px 22px;
+
+      padding: 13px 28px;
       border-radius: 999px;
-      font-size: 18px;
-      font-weight: 800;
-      letter-spacing: 1px;
+
+      font-size: 20px;
+      font-weight: 900;
+      letter-spacing: 1.5px;
       text-transform: uppercase;
-      border: 2px solid rgba(255, 105, 30, 0.95);
-      box-shadow: 0 0 18px rgba(255, 105, 30, 0.45);
+
+      border: 2px solid rgba(255, 90, 20, 0.98);
+      box-shadow:
+        0 0 16px rgba(255, 90, 20, 0.55),
+        0 6px 18px rgba(0, 0, 0, 0.35);
+
       pointer-events: none;
+      white-space: nowrap;
     }
 
     .poster-wrapper:hover .facebook-button {
-      background: rgba(255, 105, 30, 0.95);
+      background: rgba(255, 95, 25, 0.98);
       color: #111;
     }
 
@@ -201,19 +225,26 @@
         max-width: 100%;
       }
 
-      .cloud-layer {
-        opacity: 0.35;
+      .poster {
+        filter: brightness(1.18) contrast(1.08) saturate(1.2);
       }
 
-      .facebook-button {
-        font-size: 12px;
-        padding: 9px 14px;
+      .cloud-layer {
+        opacity: 0.12;
       }
 
       .screenshot-cover {
-        width: 25%;
-        height: 9%;
-        bottom: 0.3%;
+        left: 23%;
+        bottom: 0.4%;
+        width: 40%;
+        height: 14%;
+      }
+
+      .facebook-button {
+        left: 33%;
+        bottom: 4%;
+        font-size: 12px;
+        padding: 9px 16px;
       }
     }
   </style>
@@ -231,7 +262,7 @@
       title="Visit Newson Sportec on Facebook"
     >
 
-      <!-- Your original image -->
+      <!-- Original image -->
       <img
         src="sky-rider.png"
         alt="Newson Sportec Sky Rider"
@@ -250,10 +281,10 @@
       <!-- Moving dust -->
       <div class="dust-layer"></div>
 
-      <!-- Cover the unwanted Screenshot label -->
+      <!-- Cover original Screenshot white column -->
       <div class="screenshot-cover"></div>
 
-      <!-- Facebook link button -->
+      <!-- Facebook button moved to red circled area -->
       <div class="facebook-button">
         Follow on Facebook
       </div>
